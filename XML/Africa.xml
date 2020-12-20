@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Africa -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 8/15/2017 12:05:13 AM -->
+<GameInfo>
+	<GlobalParameters>
+		<Replace Name="RIVER_SOURCE_RANGE_DEFAULT" Value="8" />
+
+		<Replace Name="RIVER_PLOTS_PER_RIVER_EDGE_DEFAULT" Value="24" />
+	</GlobalParameters>
+</GameInfo>
+

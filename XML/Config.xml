@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Config -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 2/8/2018 11:57:38 AM -->
+<GameInfo>
+	<Maps>
+		<!-- for base game -->
+		<Row Domain="StandardMaps" File="{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa.lua" Name="LOC_AFRICA_MAP_NAME" Description="LOC_AFRICA_MAP_DESCRIPTION"/>
+
+		<!-- for GS -->
+		<Row Domain="Maps:Expansion2Maps" File="{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa_XP2.lua" Name="LOC_AFRICA_MAP_NAME" Description="LOC_AFRICA_MAP_DESCRIPTION"/>
+	</Maps>
+	
+	<DomainValueFilters>
+		<Row Domain="Maps:Expansion2Maps" Value="{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa.lua" Filter="difference"/>
+	</DomainValueFilters>
+
+	<!-- advanced settings -->
+	<Parameters>
+		<Row Key1="Map" Key2="{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa.lua" ParameterId="Rainfall" Name="LOC_MAP_RAINFALL_NAME" Description="LOC_MAP_RAINFALL_DESCRIPTION" Domain="Rainfall" DefaultValue="2" ConfigurationGroup="Map" ConfigurationId="rainfall" GroupId="MapOptions" Hash="0" SortIndex="250"/>
+		<Row Key1="Map" Key2="{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa_XP2.lua" ParameterId="Rainfall" Name="LOC_MAP_RAINFALL_NAME" Description="LOC_MAP_RAINFALL_DESCRIPTION" Domain="Rainfall" DefaultValue="2" ConfigurationGroup="Map" ConfigurationId="rainfall" GroupId="MapOptions" Hash="0" SortIndex="250"/>
+	</Parameters>
+</GameInfo>

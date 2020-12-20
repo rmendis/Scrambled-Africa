@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Africa_Text -->
+<!-- Author: blkbutterfly74 -->
+<!-- DateCreated: 2/8/2018 12:03:10 PM -->
+<GameData>
+	<FrontEndText>
+
+		<!-- Texts for Maps -->
+		<Row Tag="LOC_AFRICA_MAP_NAME">
+			<Text>Scrambled Africa</Text>
+		</Row>
+		<Row Tag="LOC_AFRICA_MAP_DESCRIPTION">
+			<Text>An internally randomized map of Africa.</Text>
+		</Row>
+		
+	</FrontEndText>
+</GameData>
