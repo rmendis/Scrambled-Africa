@@ -465,25 +465,18 @@ function AddFeatures()
 
 	featuregen:AddFeatures();
 	
-	-- Only keep floodplain far away from continent center
+	-- remove Saharan jungle and forest
 	for iX = 0, g_iW - 1 do
 		for iY = 0, g_iH - 1 do
 			local index = (iY * g_iW) + iX;
 			local plot = Map.GetPlot(iX, iY);
-			local iDistanceFromCenter = Map.GetPlotDistance(iX, iY, g_CenterX, g_CenterY);
+			local iDistanceFromCenter = Map.GetPlotDistance(0, iY, 0, g_CenterY);	-- distance from equator
+			local lat = -((g_iH/2) - iY)/(g_iH/2);		-- inverted
 
-			if (plot:GetFeatureType() == g_FEATURE_FLOODPLAINS) then
-				-- 50/50 chance to add floodplains when get 20 tiles out.  Linear scale out to there
-				if (TerrainBuilder.GetRandomNumber(40, "Resource Placement Score Adjust") >= iDistanceFromCenter) then
+			if (lat > 0.25 and (plot:GetFeatureType() == g_FEATURE_FOREST or plot:GetFeatureType() == g_FEATURE_JUNGLE)) then
+				-- Linear scale out
+				if (TerrainBuilder.GetRandomNumber(60, "Resource Placement Score Adjust") >= iDistanceFromCenter) then
 					TerrainBuilder.SetFeatureType(plot, -1);
-				end
-			else
-				-- add rainforest more densely at center. Inverse of floolplain logic
-				if (TerrainBuilder.GetRandomNumber(45, "Resource Placement Score Adjust") >= iDistanceFromCenter) then
-					featuregen:AddJunglesAtPlot(plot, iX, iY);
-				-- add forest more densely at center. Inverse of floolplain logic
-				elseif (TerrainBuilder.GetRandomNumber(55, "Resource Placement Score Adjust") >= iDistanceFromCenter) then
-					featuregen:AddForestsAtPlot(plot, iX, iY);
 				end
 			end
 		end
@@ -664,3 +657,76 @@ function FeatureGenerator:AddReefAtPlot(plot, iX, iY)
 		end
 	end
 end
+
+-- override: southern forest bias
+function FeatureGenerator:AddForestsAtPlot(plot, iX, iY)
+	--Forest Check. First see if it can place the feature.
+	
+	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_FOREST)) then
+		if(math.ceil(self.iForestCount * 100 / self.iNumLandPlots) <= self.iForestMaxPercent) then
+			--Weight based on adjacent plots if it has more than 3 start subtracting
+			local iScore = 3 * (1 - iY/g_iH) * 100;
+			local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_FOREST);
+
+			if(iAdjacent == 0 ) then
+				iScore = iScore;
+			elseif(iAdjacent == 1) then
+				iScore = iScore + 50;
+			elseif (iAdjacent == 2 or iAdjacent == 3) then
+				iScore = iScore + 150;
+			elseif (iAdjacent == 4) then
+				iScore = iScore - 50;
+			else
+				iScore = iScore - 200;
+			end
+				
+			if(TerrainBuilder.GetRandomNumber(300, "Resource Placement Score Adjust") <= iScore) then
+				TerrainBuilder.SetFeatureType(plot, g_FEATURE_FOREST);
+				self.iForestCount = self.iForestCount + 1;
+			end
+		end
+	end
+end
+
+-- override: more northern jungle
+function FeatureGenerator:AddJunglesAtPlot(plot, iX, iY)
+	--Jungle Check. First see if it can place the feature.
+	if(TerrainBuilder.CanHaveFeature(plot, g_FEATURE_JUNGLE)) then
+		if(math.ceil(self.iJungleCount * 100 / self.iNumLandPlots) <= self.iJungleMaxPercent) then
+
+			--Weight based on adjacent plots if it has more than 3 start subtracting
+			local iScore = 400 * iY;
+			local iAdjacent = TerrainBuilder.GetAdjacentFeatureCount(plot, g_FEATURE_JUNGLE);
+
+			if(iAdjacent == 0 ) then
+				iScore = iScore;
+			elseif(iAdjacent == 1) then
+				iScore = iScore + 50;
+			elseif (iAdjacent == 2 or iAdjacent == 3) then
+				iScore = iScore + 150;
+			elseif (iAdjacent == 4) then
+				iScore = iScore - 50;
+			else
+				iScore = iScore - 200;
+			end
+
+			if(TerrainBuilder.GetRandomNumber(100, "Resource Placement Score Adjust") <= iScore) then
+				TerrainBuilder.SetFeatureType(plot, g_FEATURE_JUNGLE);
+				local terrainType = plot:GetTerrainType();
+
+				if(terrainType == g_TERRAIN_TYPE_PLAINS_HILLS or terrainType == g_TERRAIN_TYPE_GRASS_HILLS) then
+					TerrainBuilder.SetTerrainType(plot, g_TERRAIN_TYPE_PLAINS_HILLS);
+				else
+					TerrainBuilder.SetTerrainType(plot, g_TERRAIN_TYPE_PLAINS);
+				end
+
+				self.iJungleCount = self.iJungleCount + 1;
+				return true;
+			end
+
+		end
+	end
+
+	return false
+end
+
