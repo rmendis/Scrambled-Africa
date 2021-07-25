@@ -529,12 +529,12 @@ function GenerateTerrainTypesAfrica(plotTypes, iW, iH, iFlags, bNoCoastalMountai
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
 
-			local lat = -GetLatitudeAtPlot(variationFrac, iX, iY);
+			local lat = GetLatitudeAtPlot(variationFrac, iX, iY);
 
 			local africaVal = africa:GetHeight(iX, iY);
 
 			-- Sahara desert
-			if (lat > 0.25) then													
+			if (lat > 0.25 and iY > g_CenterY) then													
 				local iPlainsTop = africa:GetHeight(100);
 				local iPlainsBottom = africa:GetHeight(90);
 				
