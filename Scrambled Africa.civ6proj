@@ -5,7 +5,7 @@
     <Name>Scrambled Africa</Name>
     <Guid>c772c12e-202e-41d5-a0ce-106d76a3d6e8</Guid>
     <ProjectGuid>ab97284e-668c-407e-b675-334f9a921fff</ProjectGuid>
-    <ModVersion>9</ModVersion>
+    <ModVersion>10</ModVersion>
     <Teaser>An internally randomised map of Africa</Teaser>
     <Description>An internally randomised map of Africa with a Saharan desert and a Sub-Saharan jungle. Standard and huge map sizes.</Description>
     <Authors>blkbutterfly74</Authors>
