@@ -263,7 +263,7 @@ local g_landStrips;
 local g_xOffset = 0;
 local g_yOffset = 0;
 local featuregen = nil;
-local variationFrac = nil;
+local africa = nil;
 
 -------------------------------------------------------------------------------
 function GenerateMap()
@@ -503,11 +503,6 @@ function GenerateTerrainTypesAfrica(plotTypes, iW, iH, iFlags, bNoCoastalMountai
 									grain_amount, iFlags, 
 									fracXExp, fracYExp);
 
-	-- variation fractal for Sahara/Sub-Sahara division
-	variationFrac = Fractal.Create(iW, iH,  
-									grain_amount, iFlags, 
-									fracXExp, fracYExp);
-
 	for iX = 0, iW - 1 do
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
@@ -529,7 +524,7 @@ function GenerateTerrainTypesAfrica(plotTypes, iW, iH, iFlags, bNoCoastalMountai
 		for iY = 0, iH - 1 do
 			local index = (iY * iW) + iX;
 
-			local lat = GetLatitudeAtPlot(variationFrac, iX, iY);
+			local lat = GetLatitudeAtPlot(africa, iX, iY);
 
 			local africaVal = africa:GetHeight(iX, iY);
 
