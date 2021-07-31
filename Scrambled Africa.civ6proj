@@ -17,8 +17,9 @@
     <AssemblyName>Scrambled Africa</AssemblyName>
     <RootNamespace>Scrambled Africa</RootNamespace>
     <FrontEndActionData><![CDATA[<FrontEndActions><UpdateDatabase id="UpdateConfig"><File>XML/Config.xml</File></UpdateDatabase><UpdateText id="UpdateText"><File>XML/Africa_Text.xml</File></UpdateText></FrontEndActions>]]></FrontEndActionData>
-    <InGameActionData><![CDATA[<InGameActions><UpdateDatabase id="AddAfricaParams"><File>XML/Africa.xml</File></UpdateDatabase><ImportFiles id="ImportMaps"><File>Maps/Africa.lua</File><File>Maps/Africa_XP2.lua</File></ImportFiles></InGameActions>]]></InGameActionData>
+    <InGameActionData><![CDATA[<InGameActions><UpdateDatabase id="AddAfricaParams"><Criteria>AfricaMapInUse</Criteria><File>XML/Africa.xml</File></UpdateDatabase><ImportFiles id="ImportMaps"><File>Maps/Africa.lua</File><File>Maps/Africa_XP2.lua</File></ImportFiles><UpdateDatabase id="AddAfricaParamsXP2"><Criteria>AfricaXP2MapInUse</Criteria><File>XML/Africa.xml</File></UpdateDatabase></InGameActions>]]></InGameActionData>
     <CompatibleVersions>1.2,2.0</CompatibleVersions>
+    <ActionCriteriaData><![CDATA[<ActionCriteria><Criteria id="AfricaMapInUse"><MapInUse>{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa.lua</MapInUse></Criteria><Criteria id="AfricaXP2MapInUse"><MapInUse>{C772C12E-202E-41D5-A0CE-106D76A3D6E8}Maps/Africa_XP2.lua</MapInUse></Criteria></ActionCriteria>]]></ActionCriteriaData>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
     <OutputPath>.</OutputPath>
